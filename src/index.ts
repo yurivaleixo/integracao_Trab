@@ -1,17 +1,23 @@
+var api = process.argv[2];
+if(api == undefined) api = 'contato'
+else if(api != 'contato') api = 'favorito'
+else api = 'contato'
+
+
 import express from "express";
-import { router } from "./config/routes";
+import { routerContato } from "./config/routes-contato";
+import { routerFavorito } from "./config/routes-favorito";
 
 const app = express();
 
 app.use(express.json());
-app.use(router);
+if(api == 'contato'){
+  app.use(routerContato);
+} else {
+  app.use(routerFavorito);
+}
 
-app.get("/", function(req, res) {
-  res.send("Resposta da Home");
-})
-
-
-app.listen(3000, () => {
+app.listen(api == 'contato' ? 3000 : 3001, () => {
   console.clear();
-  console.log("Aplicação de produtos rodando na porta 3000");
+  console.log("Aplicação de "+api+" rodando");
 });

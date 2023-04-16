@@ -10,8 +10,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Produto {
+model Contato {
   id    Int    @id @default(autoincrement())
+  isFavorito Boolean
   nome  String
-  preco Float
+  email String
+  cpf String
+  cep String
+  numero Int
+  logradouro String
+  complemento String
+  bairro String
+  localidade  String
+  uf String
+  gia String
+  ddd String
+  siafi String
 }

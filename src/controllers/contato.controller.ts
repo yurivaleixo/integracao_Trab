@@ -1,60 +1,60 @@
-import { ProdutoRepository } from '../data/produto.repository';
-import { Produto } from '../models/produto.model';
+import { ContatoRepository } from '../data/contato.repository';
+import { Contato } from '../models/contato.model';
 import { Request, Response } from "express";
 
-const repository = new ProdutoRepository();
+const repository = new ContatoRepository();
 
-export class ProdutoController {
+export class ContatoController {
   async listar(request: Request, response: Response) {
-    const produtos = await repository.listar();
+    const contatos = await repository.listar();
     return response.status(200).json({
       message: "ok",
-      data: produtos,
+      data: contatos,
     });
   }
 
   async cadastrar(request: Request, response: Response) {
-    let produto: Produto = request.body;
+    let contato: Contato = request.body;
 
-    produto = await repository.cadastrar(produto);
+    contato = await repository.cadastrar(contato);
 
     return response.status(201).json({
-      message: "Produto cadastrado!",
-      data: produto,
+      message: "Contato cadastrado!",
+      data: contato,
     });
   }
 
   async buscar(request: Request, response: Response) {
     const id = Number.parseInt(request.params.id);
 
-    const produto = await repository.buscar(id);
+    const contato = await repository.buscar(id);
 
-    if (!produto) {
-      return response.status(404).json({ message: "Produto não encontrado" });
+    if (!contato) {
+      return response.status(404).json({ message: "Contato não encontrado" });
     }
 
     return response.status(200).json({
       message: "ok",
-      data: produto,
+      data: contato,
     });
   }
 
   deletar(request: Request, response: Response) {
     const id = Number.parseInt(request.params.id);
-    let produtos = repository.deletar(id);
+    let contatos = repository.deletar(id);
     return response.status(200).json({
       message: "ok",
-      data: produtos,
+      data: contatos,
     });
   }
 
   alterar(request: Request, response: Response) {
-    let produto: Produto = request.body;
-    produto = repository.alterar(produto);
+    let contato: Contato = request.body;
+    contato = repository.alterar(contato);
 
     return response.status(200).json({
       message: "ok",
-      data: produto,
+      data: contato,
     });
   }
 }
