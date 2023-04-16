@@ -7,17 +7,22 @@ let contato: Contato[] = [];
 const prisma = new PrismaClient();
 
 export class ContatoRepository {
+  //Busca no banco todos os contatos
   async listar(): Promise<Contato[]> {
     return await prisma.contato.findMany();
   }
 
+  //Cadastra contato
   async cadastrar(contato: Contato): Promise<Contato> {
+    //Constroi options para chamada de serviço em API externa
     var options = {
       url : 'https://viacep.com.br/ws/'+contato.cep+'/json/',
       method : 'GET',
       json: true
     }
+    //Chama serviço externo
     let response = await request(options)
+    //Cadastra contato em banco
     await prisma.contato.create({
       data: {
         isFavorito: false,
@@ -39,6 +44,7 @@ export class ContatoRepository {
     return contato;
   }
 
+  //Busca no banco o id de um contato especifico
   async buscar(id: number): Promise<Contato | null> {
     return await prisma.contato.findUnique({
       where: {
@@ -47,12 +53,14 @@ export class ContatoRepository {
     });
   }
 
+  //Apaga no banco o conatato do ID passado pelo serviço
   deletar(id: number): Contato[] {
     const index = contato.findIndex((p) => p.id === id)!;
     if (index != -1) contato.splice(index, 1);
     return contato;
   }
 
+  //Altera os dados de um contato
   alterar(contato: Contato): Contato {
     const index = contato.findIndex((p) => p.id === contato.id)!;
     contato[index] = contato;

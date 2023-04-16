@@ -6,7 +6,9 @@ let contato: Contato[] = [];
 const prisma = new PrismaClient();
 
 export class FavoritoRepository {
+  //Busca no banco todos os contatos que foram favoritados
   async listar(): Promise<Contato[]> {
+    //Faz uma busca no banco por todos os contatos como favorito = true
     return await prisma.contato.findMany({
       where: {
         isFavorito: true,
@@ -14,6 +16,7 @@ export class FavoritoRepository {
     });
   }
 
+  //Altera no banco para true o campo isFavorito pelo id passado pelo serviço 
   async favoritar(contato: Contato): Promise<Contato> {
     await prisma.contato.update({
       where: { id: contato.id },
@@ -24,6 +27,7 @@ export class FavoritoRepository {
     return contato;
   }
 
+  //Altera no banco para false o campo isFavorito pelo id passado pelo serviço 
   async desfavoritar(contato: Contato): Promise<Contato[]> {
     await prisma.contato.update({
       where: { id: contato.id },
