@@ -48,12 +48,16 @@ export class ContatoController {
     });
   }
 
-  alterar(request: Request, response: Response) {
-    let contato: Contato = request.body;
-    contato = repository.alterar(contato);
+  async alterar(request: Request, response: Response) {
+    let contato: Contato | null = request.body;
+    contato = await repository.alterar(contato);
+
+    if (!contato) {
+      return response.status(404).json({ message: "Produto não encontrado" });
+    }
 
     return response.status(200).json({
-      message: "ok",
+      message: "Contato alterado",
       data: contato,
     });
   }

@@ -5,14 +5,14 @@ GET http://localhost:3000/contato
 GET http://localhost:3000/contato/10
 
 ### Buscar contato por nome
-GET http://localhost:3000/contato/1
+GET http://localhost:3000/contato/2
 
 ### Cadastrar contato
 POST http://localhost:3000/contato
 Content-Type: application/json
 
 {
-    "nome" : "Yuri Valeixo",
+    "nome" : "Yuri Cesar Valeixo",
     "isFavorito" : false,
     "email" : "yuri@21312.com",
     "cpf" : "2565514",
@@ -29,24 +29,25 @@ Content-Type: application/json
 }
 
 ### Deletar contato
-DELETE http://localhost:3000/contato/1
+DELETE http://localhost:3000/contato/2
 
 ### Alterar contato
 PUT http://localhost:3000/contato
 Content-Type: application/json
 
 {
-    "nome" : "Yuri Valeixo",
+    "id" : 1,
+    "nome" : "Aldredo Valeixo",
     "isFavorito" : false,
     "email" : "yuri@21312.com",
-    "cpf" : "2565514",
-    "cep" : "9900998",
-    "numero" : "2587",
-    "logradouro" : "Rua augusta",
-    "complemento" : "Casa",
-    "bairro" : "Boqueirão",
+    "cpf" : "5565514",
+    "cep" : "81200249",
+    "numero" : "4000",
+    "logradouro" : "Rua bbb",
+    "complemento" : "AP",
+    "bairro" : "Taruma",
     "localidade" : "Curitiba",
-    "uf" : "PR",
+    "uf" : "SP",
     "gia" : "2258",
     "ddd" : "041",
     "siafi" : "22854"

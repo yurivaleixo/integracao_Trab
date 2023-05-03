@@ -60,10 +60,31 @@ export class ContatoRepository {
     return contato;
   }
 
-  //Altera os dados de um contato
-  alterar(contato: Contato): Contato {
-    const index = contato.findIndex((p) => p.id === contato.id)!;
-    contato[index] = contato;
-    return contato;
+
+  async alterar(contato: Contato | null): Promise<Contato | null> {
+    try {
+      const contatoAlterado = await prisma.contato.update({
+        where: {
+          id: contato?.id,
+        },
+        data: {
+          nome: contato?.nome,
+          isFavorito: contato?.isFavorito,
+          email: contato?.email,
+          cpf: contato?.cpf,
+          cep: contato?.cep,
+        },
+      });
+      return contato;
+    } catch {
+      return null;
+    }
   }
+
+  //Altera os dados de um contato
+  //alterar(contato: Contato): Contato {
+    //const index = contato.findIndex((p) => p.id === contato.id)!;
+    //contato[index] = contato;
+    //return contato;
+  //}
 }
