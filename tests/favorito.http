@@ -1,0 +1,21 @@
+### Listar Favoritos
+GET http://localhost:3001/favorito
+
+### Favoritar
+POST http://localhost:3001/favorito
+Content-Type: application/json
+
+{
+    "id" : 1,
+    "isFavorito" : true
+}
+
+### Desfavoritar
+DELETE http://localhost:3001/favorito
+Content-Type: application/json
+
+{
+    "id" : 1
+}
+
+

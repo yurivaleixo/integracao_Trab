@@ -1,0 +1,54 @@
+### Listar contatos
+GET http://localhost:3000/contato
+
+### Buscar contato por nome
+GET http://localhost:3000/contato/10
+
+### Buscar contato por nome
+GET http://localhost:3000/contato/1
+
+### Cadastrar contato
+POST http://localhost:3000/contato
+Content-Type: application/json
+
+{
+    "nome" : "Yuri Valeixo",
+    "isFavorito" : false,
+    "email" : "yuri@21312.com",
+    "cpf" : "2565514",
+    "cep" : "81200240",
+    "numero" : 2587,
+    "logradouro" : "Rua augusta",
+    "complemento" : "Casa",
+    "bairro" : "Boqueirão",
+    "localidade" : "Curitiba",
+    "uf" : "PR",
+    "gia" : "2258",
+    "ddd" : "041",
+    "siafi" : "22854"
+}
+
+### Deletar contato
+DELETE http://localhost:3000/contato/1
+
+### Alterar contato
+PUT http://localhost:3000/contato
+Content-Type: application/json
+
+{
+    "nome" : "Yuri Valeixo",
+    "isFavorito" : false,
+    "email" : "yuri@21312.com",
+    "cpf" : "2565514",
+    "cep" : "9900998",
+    "numero" : "2587",
+    "logradouro" : "Rua augusta",
+    "complemento" : "Casa",
+    "bairro" : "Boqueirão",
+    "localidade" : "Curitiba",
+    "uf" : "PR",
+    "gia" : "2258",
+    "ddd" : "041",
+    "siafi" : "22854"
+}
+

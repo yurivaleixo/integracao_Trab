@@ -20,13 +20,14 @@ app.use(express.json());
 if(api == 'contato'){
   //se for contato inicia rota para contato
   app.use(routerContato);
+  console.log("IF CONTATO")
 } else {
   //se for favorito inicia rota para favorito
   app.use(routerFavorito);
+  console.log("IF FAVORITO")
 }
 
 //Inicia serviço node e se for contato abre a API na porta 3000 caso seja favorito inicia na porta 3001
 app.listen(api == 'contato' ? 3000 : 3001, () => {
-  console.clear();
   console.log("Aplicação de "+api+" rodando");
 });
