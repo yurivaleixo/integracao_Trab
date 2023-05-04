@@ -1,4 +1,4 @@
-import { Contato } from "../models/contato.model";
+import { Contato } from './../models/contato.model';
 import { PrismaClient } from "@prisma/client";
 
 let contato: Contato[] = [];
@@ -28,14 +28,33 @@ export class FavoritoRepository {
   }
 
   //Altera no banco para false o campo isFavorito pelo id passado pelo serviço 
-  async desfavoritar(contato: Contato): Promise<Contato[]> {
-    await prisma.contato.update({
-      where: { id: contato.id },
-      data: {
-        isFavorito: false
-      },
-    });
-    return contato;
+
+  async desfavoritar(contato: Contato | null): Promise<Contato | null> {
+    try {
+      const contatoAlterado = await prisma.contato.update({
+        where: {
+          id: contato?.id,
+        },
+        data: {
+          isFavorito: false
+        },
+      });
+      return contato;
+    } catch {
+      return null;
+    }
   }
+
+
+
+  //async desfavoritar(contato: Contato): Promise<Contato[]> {
+    //await prisma.contato.update({
+      //where: { id: contato.id },
+      //data: {
+        //isFavorito: false
+      //},
+    //});
+    //return contato;
+  //}
 
 }

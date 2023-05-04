@@ -39,14 +39,29 @@ export class ContatoController {
     });
   }
 
-  deletar(request: Request, response: Response) {
+  async deletar(request: Request, response: Response) {
     const id = Number.parseInt(request.params.id);
-    let contatos = repository.deletar(id);
+    let contato = await repository.deletar(id);
+
+    if (!contato) {
+      return response.status(404).json({ message: "Contato não encontrado" });
+    }
+
     return response.status(200).json({
       message: "ok",
-      data: contatos,
+      data: contato,
     });
   }
+
+
+  // deletar(request: Request, response: Response) {
+  //   const id = Number.parseInt(request.params.id);
+  //   let contato = repository.deletar(id);
+  //   return response.status(200).json({
+  //     message: "ok",
+  //     data: contato,
+  //   });
+  // }
 
   async alterar(request: Request, response: Response) {
     let contato: Contato | null = request.body;

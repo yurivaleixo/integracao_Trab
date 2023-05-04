@@ -54,11 +54,26 @@ export class ContatoRepository {
   }
 
   //Apaga no banco o conatato do ID passado pelo serviço
-  deletar(id: number): Contato[] {
-    const index = contato.findIndex((p) => p.id === id)!;
-    if (index != -1) contato.splice(index, 1);
-    return contato;
+
+  async deletar(idContato: number): Promise<Contato | null> {
+    try {
+      const contato = await prisma.contato.delete({
+        where: {
+          id: idContato,
+        },
+      });
+      return contato;
+    } catch {
+      return null;
+    }
   }
+
+
+  // deletar(id: number): Contato[] {
+  //   const index = contato.findIndex((p) => p.id === id)!;
+  //   if (index != -1) contato.splice(index, 1);
+  //   return contato;
+  // }
 
 
   async alterar(contato: Contato | null): Promise<Contato | null> {
